@@ -75,7 +75,7 @@ class FlxSoundGroup
 			sound.resume();
 	}
 
-	function set_volume(volume:Float):Float
+    public function set_volume(volume:Float):Float
 	{
 		this.volume = volume;
 		for (sound in sounds)
