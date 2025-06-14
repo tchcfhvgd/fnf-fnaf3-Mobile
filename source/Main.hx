@@ -5,7 +5,7 @@ import Discord.DiscordClient;
 #end
 
 import flixel.graphics.FlxGraphic;
-
+import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;
