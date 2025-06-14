@@ -63,6 +63,9 @@ class GameOverSubstate extends MusicBeatSubstate
 		add(camFollowPos);
 
 		FlxTween.tween(deathBG, {alpha: 1}, 6);
+		
+		addTouchPad("NONE", "A_B");
+		addTouchPadCamera();
 	}
 
 	var isFollowingAlready:Bool = false;

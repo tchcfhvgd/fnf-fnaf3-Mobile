@@ -25,7 +25,7 @@ class OptionsState extends MusicBeatState
 	var darkenBG:FlxSprite;
 
 	// Options list
-	var menuList:Array<String> = ['Notecolors', 'Controls', 'Notedelay', 'Graphics', 'Visuals', 'Gameplay', 'Accessibility'];
+	var menuList:Array<String> = ['Notecolors', 'Controls', 'Notedelay', 'Graphics', 'Visuals', 'Gameplay', 'Accessibility', 'Mobile Options'];
 
 	// Filepath shortcut
 	var spritePath:String = 'menus/optionsMenu/';
@@ -72,6 +72,8 @@ class OptionsState extends MusicBeatState
 
 		ClientPrefs.saveSettings();
 
+		addTouchPad("NONE", "A_B_C");
+		
 		super.create();
 	}
 
@@ -138,6 +140,11 @@ class OptionsState extends MusicBeatState
 		FlxG.sound.play(Paths.sound('done'), 1);
 
 		// Handle button actions based on index.
+		
+		if (index != 2){
+			persistentUpdate = false;
+			removeTouchPad();
+		}
 		switch (index) {
 			case 0: // 'Notecolors'
 				openSubState(new options.NotesSubState());
@@ -153,6 +160,8 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.GameplaySettingsSubState());
 			case 6: // 'Accessibility'
 				openSubState(new options.AccessibilitySubState());
+			case 7:
+				openSubState(new mobile.options.MobileOptionsSubState());
 		}
 		button.x = 69;
 		button.y = button.y + 1;
@@ -185,6 +194,9 @@ class OptionsState extends MusicBeatState
 	{
 		super.closeSubState();
 		ClientPrefs.saveSettings();
+		persistentUpdate = true;
+		removeTouchPad();
+		addTouchPad("NONE", "A_B_C");
 	}
 
 	override function update(elapsed:Float)
@@ -194,6 +206,11 @@ class OptionsState extends MusicBeatState
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
+		}
+		
+		if (touchPad != null && touchPad.buttonC.justPressed) {
+			touchPad.active = touchPad.visible = persistentUpdate = false;
+			openSubState(new mobile.MobileControlSelectSubState());
 		}
 	}
 }

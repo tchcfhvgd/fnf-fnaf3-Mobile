@@ -115,6 +115,8 @@ class StoryMenuState extends MusicBeatState
 		startButton.y = 385;
 
 		FlxG.mouse.visible = true;
+		
+		addTouchPad("NONE", "B");
 	}
 	
 	override function closeSubState()

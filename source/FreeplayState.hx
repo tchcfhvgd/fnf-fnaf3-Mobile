@@ -169,6 +169,8 @@ class FreeplayState extends MusicBeatState
 		/* Call our separated function for creating the difficulty selection menu */
 		createDifficultyMenu();
 
+		addTouchPad("UP_DOWN", "B");
+		
 		super.create();
 	}
 
@@ -571,6 +573,7 @@ class FreeplayState extends MusicBeatState
 	public function openModifiers()
 	{
 		FlxG.mouse.visible = false;
+		touchPad.active = touchPad.visible = persistentUpdate = false;
 		openSubState(new GameplayChangersSubstate());
 	}
 
@@ -587,6 +590,8 @@ class FreeplayState extends MusicBeatState
 		changeSelection(0, false);
 		persistentUpdate = true;
 		super.closeSubState();
+		removeTouchPad();
+		addTouchPad("UP_DOWN", "B");
 	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)

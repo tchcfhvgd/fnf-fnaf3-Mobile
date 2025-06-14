@@ -46,6 +46,8 @@ class FlashingState extends MusicBeatState
                 warnSprite.alpha = 1;
             }
         });
+	
+	    addTouchPad("NONE", "A");
 	}
 
 	override function update(elapsed:Float)

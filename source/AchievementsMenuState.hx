@@ -90,6 +90,8 @@ class AchievementsMenuState extends MusicBeatState
 		/* Call our separated function for creating text objects */
 		createTextStuff();
 
+		addTouchPad("NONE", "B");
+		
 		super.create();
 	}
 

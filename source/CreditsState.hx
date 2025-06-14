@@ -83,6 +83,8 @@ class CreditsState extends FlxState
 
             buttons.push(button);
         }
+        
+        addTouchPad("NONE", "B");
     }
 
     function onButtonClicked(index:Int)
@@ -95,7 +97,7 @@ class CreditsState extends FlxState
 
     override function update(elapsed:Float)
     {
-        if (FlxG.keys.justPressed.BACKSPACE || FlxG.keys.justPressed.ESCAPE)
+        if (FlxG.keys.justPressed.BACKSPACE || FlxG.keys.justPressed.ESCAPE || touchPad.buttonB.justPressed)
         {
             FlxG.switchState(new MainMenuState());
         }

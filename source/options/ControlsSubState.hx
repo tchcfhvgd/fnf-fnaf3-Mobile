@@ -112,6 +112,8 @@ class ControlsSubState extends MusicBeatSubstate {
 			}
 		}
 		changeSelection();
+		
+		addTouchPad("LEFT_FULL", "A_B");
 	}
 
 	var leaving:Bool = false;
@@ -141,7 +143,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 			}
 
-			if(controls.ACCEPT && nextAccept <= 0 || FlxG.mouse.justPressed && nextAccept <= 0) {
+			if(controls.ACCEPT && nextAccept <= 0) {
 				if(optionShit[curSelected][0] == defaultKey) {
 					ClientPrefs.keyBinds = ClientPrefs.defaultKeys.copy();
 					reloadKeys();

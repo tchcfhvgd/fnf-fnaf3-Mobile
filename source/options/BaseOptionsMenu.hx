@@ -125,6 +125,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		changeSelection();
 		reloadCheckboxes();
+		
+		addTouchPad("LEFT_FULL", "A_B_C");
 	}
 
 	public function addOption(option:Option) {
@@ -168,7 +170,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 			if(usesCheckbox)
 			{
-				if (controls.ACCEPT || FlxG.mouse.justPressed)
+				if (controls.ACCEPT)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
@@ -176,13 +178,13 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					reloadCheckboxes();
 				}
 			} else {
-				if(controls.UI_LEFT || controls.UI_RIGHT || FlxG.mouse.justPressed || FlxG.mouse.justPressedRight) {
-					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P || FlxG.mouse.pressed || FlxG.mouse.pressedRight);
+				if(controls.UI_LEFT || controls.UI_RIGHT) {
+					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P);
 					if(holdTime > 0.5 || pressed) {
 						if(pressed) {
 							var add:Dynamic = null;
 							if(curOption.type != 'string') {
-								add = (controls.UI_LEFT || FlxG.mouse.justPressed) ? -curOption.changeValue : curOption.changeValue;
+								add = (controls.UI_LEFT) ? -curOption.changeValue : curOption.changeValue;
 							}
 
 							switch(curOption.type)
@@ -205,7 +207,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 								case 'string':
 									var num:Int = curOption.curOption; //lol
-									if(controls.UI_LEFT_P || FlxG.mouse.pressed) --num;
+									if(controls.UI_LEFT_P) --num;
 									else num++;
 
 									if(num < 0) {
@@ -247,7 +249,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET || FlxG.mouse.justPressedMiddle)
+			if(controls.RESET || touchPad.buttonC.justPressed)
 			{
 				for (i in 0...optionsArray.length)
 				{
