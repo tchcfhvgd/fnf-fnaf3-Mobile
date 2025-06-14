@@ -3179,8 +3179,6 @@ class PlayState extends MusicBeatState
 		updateTime = false;
 		deathCounter = 0;
 		seenCutscene = false;
-		
-		mobileControls.instance.visible = #if !android touchPad.visible = #end false;
 
 		// Achievement Unlock
 		#if ACHIEVEMENTS_ALLOWED
