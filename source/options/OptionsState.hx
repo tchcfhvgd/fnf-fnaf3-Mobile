@@ -25,7 +25,7 @@ class OptionsState extends MusicBeatState
 	var darkenBG:FlxSprite;
 
 	// Options list
-	var menuList:Array<String> = ['Notecolors', 'Controls', 'Notedelay', 'Graphics', 'Visuals', 'Gameplay', 'Accessibility', 'Mobile Options'];
+	var menuList:Array<String> = ['Notecolors', 'Controls', 'Notedelay', 'Graphics', 'Visuals', 'Gameplay', 'Accessibility'];
 
 	// Filepath shortcut
 	var spritePath:String = 'menus/optionsMenu/';
@@ -72,7 +72,7 @@ class OptionsState extends MusicBeatState
 
 		ClientPrefs.saveSettings();
 
-		addTouchPad("NONE", "A_B_C");
+		addTouchPad("NONE", "A_B_X_Y");
 		
 		super.create();
 	}
@@ -196,7 +196,7 @@ class OptionsState extends MusicBeatState
 		ClientPrefs.saveSettings();
 		persistentUpdate = true;
 		removeTouchPad();
-		addTouchPad("NONE", "A_B_C");
+		addTouchPad("NONE", "A_B_X_Y");
 	}
 
 	override function update(elapsed:Float)
@@ -208,9 +208,14 @@ class OptionsState extends MusicBeatState
 			MusicBeatState.switchState(new MainMenuState());
 		}
 		
-		if (touchPad != null && touchPad.buttonC.justPressed) {
+		if (touchPad != null && touchPad.buttonX.justPressed) {
 			touchPad.active = touchPad.visible = persistentUpdate = false;
 			openSubState(new mobile.MobileControlSelectSubState());
+		}
+		
+		if (touchPad != null && touchPad.buttonY.justPressed) {
+			touchPad.active = touchPad.visible = persistentUpdate = false;
+			openSubState(new mobile.options.MobileOptionsSubState());
 		}
 	}
 }
